@@ -5,14 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { products, getProductsByCategory } from '@/data/products';
-import { useCart } from '@/contexts/CartContext';
-import { useToast } from '@/hooks/use-toast';
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const { addToCart } = useCart();
-  const { toast } = useToast();
 
   const categories = [
     { id: 'all', name: 'All Items' },
@@ -27,43 +23,29 @@ const Shop = () => {
     setFilteredProducts(getProductsByCategory(categoryId));
   };
 
-  const handleAddToCart = (product: any) => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image
-    });
-    
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-  };
-
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-background">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 luxury-gradient">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="font-playfair text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16">
+          <h1 className="font-playfair text-5xl font-bold text-charcoal-800 mb-6">
             Our Collection
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-charcoal-600 max-w-2xl mx-auto">
             Discover our complete range of handcrafted luxury jewelry, each piece designed to celebrate life's special moments.
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((category) => (
             <Button
               key={category.id}
               variant={selectedCategory === category.id ? "default" : "outline"}
               onClick={() => handleCategoryChange(category.id)}
-              className={`px-6 py-2 ${
+              className={`px-8 py-3 transition-all duration-300 ${
                 selectedCategory === category.id 
-                  ? 'bg-gold-600 hover:bg-gold-700 text-white' 
+                  ? 'gold-gradient text-white luxury-shadow' 
                   : 'border-gold-600 text-gold-600 hover:bg-gold-50'
               }`}
             >
@@ -75,26 +57,26 @@ const Shop = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProducts.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 border-gold-200/30">
+            <Card key={product.id} className="group hover:shadow-2xl transition-all duration-500 border-gold-200/30 luxury-shadow shine-effect">
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   {product.isBestSeller && (
-                    <Badge className="absolute top-3 left-3 bg-gold-600 hover:bg-gold-700">
+                    <Badge className="absolute top-3 left-3 gold-gradient text-white">
                       Best Seller
                     </Badge>
                   )}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="p-6">
-                  <h3 className="font-playfair text-lg font-semibold mb-2 text-foreground">
+                <div className="p-6 velvet-texture">
+                  <h3 className="font-playfair text-lg font-semibold mb-2 text-charcoal-800">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-3 capitalize">
+                  <p className="text-sm text-charcoal-500 mb-3 capitalize">
                     {product.category}
                   </p>
                   <p className="text-2xl font-bold text-gold-600 mb-4">
@@ -102,16 +84,10 @@ const Shop = () => {
                   </p>
                   <div className="space-y-2">
                     <Link to={`/product/${product.id}`}>
-                      <Button variant="outline" className="w-full border-gold-600 text-gold-600 hover:bg-gold-50">
+                      <Button className="w-full gold-gradient text-white hover:shadow-lg transition-all duration-300">
                         View Details
                       </Button>
                     </Link>
-                    <Button 
-                      onClick={() => handleAddToCart(product)}
-                      className="w-full bg-gold-600 hover:bg-gold-700 text-white"
-                    >
-                      Add to Cart
-                    </Button>
                   </div>
                 </div>
               </CardContent>
@@ -120,8 +96,8 @@ const Shop = () => {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">
+          <div className="text-center py-16">
+            <p className="text-xl text-charcoal-500">
               No products found in this category.
             </p>
           </div>

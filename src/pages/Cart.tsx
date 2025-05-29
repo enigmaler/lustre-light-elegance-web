@@ -10,17 +10,17 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center py-16 px-4">
+      <div className="min-h-screen flex items-center justify-center py-16 px-4 luxury-gradient">
         <div className="text-center max-w-md mx-auto">
-          <ShoppingBag className="w-16 h-16 text-gold-600 mx-auto mb-6" />
-          <h1 className="font-playfair text-3xl font-bold text-foreground mb-4">
+          <ShoppingBag className="w-20 h-20 text-gold-500 mx-auto mb-8" />
+          <h1 className="font-playfair text-4xl font-bold text-charcoal-800 mb-6">
             Your cart is empty
           </h1>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-charcoal-600 mb-8 text-lg">
             Discover our beautiful collection of handcrafted jewelry and find the perfect piece for you.
           </p>
           <Link to="/shop">
-            <Button className="bg-gold-600 hover:bg-gold-700 text-white px-8 py-3">
+            <Button className="gold-gradient text-white px-10 py-4 text-lg luxury-shadow">
               Continue Shopping
             </Button>
           </Link>
@@ -34,59 +34,59 @@ const Cart = () => {
   const total = subtotal + tax;
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-background">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 luxury-gradient">
       <div className="max-w-4xl mx-auto">
-        <h1 className="font-playfair text-3xl font-bold text-foreground mb-8">
+        <h1 className="font-playfair text-4xl font-bold text-charcoal-800 mb-8">
           Shopping Cart
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-6">
             {items.map((item) => (
-              <Card key={`${item.id}-${item.variant || 'default'}`} className="border-gold-200/30">
-                <CardContent className="p-6">
-                  <div className="flex flex-col sm:flex-row gap-4">
+              <Card key={`${item.id}-${item.variant || 'default'}`} className="border-gold-200/30 luxury-shadow">
+                <CardContent className="p-6 velvet-texture">
+                  <div className="flex flex-col sm:flex-row gap-6">
                     <div className="flex-shrink-0">
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-24 h-24 object-cover rounded-lg"
+                        className="w-32 h-32 object-cover rounded-lg luxury-shadow"
                       />
                     </div>
                     <div className="flex-grow">
-                      <h3 className="font-playfair text-lg font-semibold text-foreground">
+                      <h3 className="font-playfair text-xl font-semibold text-charcoal-800 mb-2">
                         {item.name}
                       </h3>
                       {item.variant && (
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-charcoal-500 mb-2">
                           Size: {item.variant}
                         </p>
                       )}
-                      <p className="text-lg font-bold text-gold-600 mt-2">
+                      <p className="text-2xl font-bold text-gold-600 mb-4">
                         ${item.price.toLocaleString()}
                       </p>
                     </div>
-                    <div className="flex flex-col sm:items-end space-y-3">
+                    <div className="flex flex-col sm:items-end space-y-4">
                       <div className="flex items-center space-x-3">
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-8 w-8"
+                          className="h-10 w-10 border-gold-300 hover:bg-gold-50"
                           onClick={() => updateQuantity(`${item.id}-${item.variant || 'default'}`, item.quantity - 1)}
                         >
-                          <Minus className="w-3 h-3" />
+                          <Minus className="w-4 h-4" />
                         </Button>
-                        <span className="text-sm font-semibold w-8 text-center">
+                        <span className="text-lg font-semibold w-12 text-center text-charcoal-800">
                           {item.quantity}
                         </span>
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-8 w-8"
+                          className="h-10 w-10 border-gold-300 hover:bg-gold-50"
                           onClick={() => updateQuantity(`${item.id}-${item.variant || 'default'}`, item.quantity + 1)}
                         >
-                          <Plus className="w-3 h-3" />
+                          <Plus className="w-4 h-4" />
                         </Button>
                       </div>
                       <Button
@@ -95,7 +95,7 @@ const Cart = () => {
                         onClick={() => removeFromCart(`${item.id}-${item.variant || 'default'}`)}
                         className="text-red-600 hover:text-red-700 hover:bg-red-50"
                       >
-                        <Trash2 className="w-4 h-4 mr-1" />
+                        <Trash2 className="w-4 h-4 mr-2" />
                         Remove
                       </Button>
                     </div>
@@ -107,33 +107,33 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <Card className="border-gold-200/30 sticky top-24">
-              <CardContent className="p-6">
-                <h2 className="font-playfair text-xl font-bold text-foreground mb-4">
+            <Card className="border-gold-200/30 luxury-shadow sticky top-24">
+              <CardContent className="p-6 velvet-texture">
+                <h2 className="font-playfair text-2xl font-bold text-charcoal-800 mb-6">
                   Order Summary
                 </h2>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span>${subtotal.toLocaleString()}</span>
+                <div className="space-y-4">
+                  <div className="flex justify-between text-lg">
+                    <span className="text-charcoal-600">Subtotal</span>
+                    <span className="text-charcoal-800 font-semibold">${subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Tax</span>
-                    <span>${tax.toFixed(2)}</span>
+                  <div className="flex justify-between text-lg">
+                    <span className="text-charcoal-600">Tax</span>
+                    <span className="text-charcoal-800 font-semibold">${tax.toFixed(2)}</span>
                   </div>
-                  <div className="border-t pt-3">
-                    <div className="flex justify-between font-bold text-lg">
-                      <span>Total</span>
+                  <div className="border-t border-gold-200 pt-4">
+                    <div className="flex justify-between font-bold text-xl">
+                      <span className="text-charcoal-800">Total</span>
                       <span className="text-gold-600">${total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
-                <Link to="/checkout" className="block mt-6">
-                  <Button className="w-full bg-gold-600 hover:bg-gold-700 text-white py-3">
+                <Link to="/checkout" className="block mt-8">
+                  <Button className="w-full gold-gradient text-white py-4 text-lg luxury-shadow">
                     Proceed to Checkout
                   </Button>
                 </Link>
-                <Link to="/shop" className="block mt-3">
+                <Link to="/shop" className="block mt-4">
                   <Button variant="outline" className="w-full border-gold-600 text-gold-600 hover:bg-gold-50">
                     Continue Shopping
                   </Button>

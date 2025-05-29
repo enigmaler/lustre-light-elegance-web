@@ -20,11 +20,11 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center luxury-gradient">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Product not found</h1>
+          <h1 className="text-2xl font-bold mb-4 text-charcoal-800">Product not found</h1>
           <Link to="/shop">
-            <Button>Back to Shop</Button>
+            <Button className="gold-gradient text-white">Back to Shop</Button>
           </Link>
         </div>
       </div>
@@ -42,8 +42,15 @@ const ProductDetail = () => {
     });
     
     toast({
-      title: "Added to cart",
-      description: `${quantity} ${product.name} has been added to your cart.`,
+      title: "Added to Cart",
+      description: (
+        <div className="flex flex-col space-y-2">
+          <span>{quantity} {product.name} has been added to your cart.</span>
+          <Link to="/cart" className="text-gold-600 hover:text-gold-700 font-medium">
+            Go to Cart →
+          </Link>
+        </div>
+      ),
     });
   };
 
@@ -55,10 +62,10 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-background">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 luxury-gradient">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
-        <Link to="/shop" className="inline-flex items-center text-gold-600 hover:text-gold-700 mb-8">
+        <Link to="/shop" className="inline-flex items-center text-gold-600 hover:text-gold-700 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Shop
         </Link>
@@ -66,11 +73,11 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div className="space-y-4">
-            <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+            <div className="aspect-square overflow-hidden rounded-lg bg-white luxury-shadow shine-effect">
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-cover hover-scale"
+                className="w-full h-full object-cover hover-scale cursor-zoom-in"
               />
             </div>
             {product.images.length > 1 && (
@@ -79,8 +86,8 @@ const ProductDetail = () => {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square overflow-hidden rounded-lg border-2 ${
-                      selectedImage === index ? 'border-gold-600' : 'border-transparent'
+                    className={`aspect-square overflow-hidden rounded-lg border-2 transition-all duration-300 ${
+                      selectedImage === index ? 'border-gold-500 luxury-shadow' : 'border-gold-200 hover:border-gold-400'
                     }`}
                   >
                     <img
@@ -95,37 +102,37 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Details */}
-          <div className="space-y-6">
+          <div className="space-y-8 velvet-texture p-8 rounded-lg luxury-shadow">
             <div>
               {product.isBestSeller && (
-                <Badge className="mb-4 bg-gold-600 hover:bg-gold-700">
+                <Badge className="mb-4 gold-gradient text-white">
                   Best Seller
                 </Badge>
               )}
-              <h1 className="font-playfair text-3xl sm:text-4xl font-bold text-foreground mb-2">
+              <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-charcoal-800 mb-4">
                 {product.name}
               </h1>
-              <p className="text-sm text-muted-foreground capitalize mb-4">
+              <p className="text-lg text-charcoal-500 capitalize mb-6">
                 {product.category}
               </p>
-              <p className="text-3xl font-bold text-gold-600">
+              <p className="text-4xl font-bold text-gold-600">
                 ${product.price.toLocaleString()}
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-3">Description</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4 text-charcoal-800">Description</h3>
+              <p className="text-charcoal-600 leading-relaxed text-lg">
                 {product.description}
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-3">Features</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-semibold mb-4 text-charcoal-800">Features</h3>
+              <ul className="space-y-3">
                 {product.features.map((feature, index) => (
-                  <li key={index} className="flex items-center text-muted-foreground">
-                    <span className="w-2 h-2 bg-gold-600 rounded-full mr-3"></span>
+                  <li key={index} className="flex items-center text-charcoal-600">
+                    <span className="w-2 h-2 bg-gold-500 rounded-full mr-4"></span>
                     {feature}
                   </li>
                 ))}
@@ -135,9 +142,9 @@ const ProductDetail = () => {
             {/* Variants */}
             {product.variants && product.variants.length > 0 && (
               <div>
-                <h3 className="text-lg font-semibold mb-3">Size</h3>
+                <h3 className="text-xl font-semibold mb-4 text-charcoal-800">Size</h3>
                 <Select value={selectedVariant} onValueChange={setSelectedVariant}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full border-gold-300 focus:border-gold-500">
                     <SelectValue placeholder="Select a size" />
                   </SelectTrigger>
                   <SelectContent>
@@ -153,23 +160,25 @@ const ProductDetail = () => {
 
             {/* Quantity Selector */}
             <div>
-              <h3 className="text-lg font-semibold mb-3">Quantity</h3>
-              <div className="flex items-center space-x-3">
+              <h3 className="text-xl font-semibold mb-4 text-charcoal-800">Quantity</h3>
+              <div className="flex items-center space-x-4">
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={() => handleQuantityChange(-1)}
                   disabled={quantity <= 1}
+                  className="border-gold-300 hover:bg-gold-50"
                 >
                   <Minus className="w-4 h-4" />
                 </Button>
-                <span className="text-lg font-semibold w-12 text-center">
+                <span className="text-xl font-semibold w-12 text-center text-charcoal-800">
                   {quantity}
                 </span>
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={() => handleQuantityChange(1)}
+                  className="border-gold-300 hover:bg-gold-50"
                 >
                   <Plus className="w-4 h-4" />
                 </Button>
@@ -180,7 +189,7 @@ const ProductDetail = () => {
             <Button
               onClick={handleAddToCart}
               size="lg"
-              className="w-full bg-gold-600 hover:bg-gold-700 text-white text-lg py-6"
+              className="w-full gold-gradient text-white text-xl py-6 luxury-shadow hover:shadow-2xl transition-all duration-300"
               disabled={product.variants && product.variants.length > 0 && !selectedVariant}
             >
               Add to Cart - ${(product.price * quantity).toLocaleString()}

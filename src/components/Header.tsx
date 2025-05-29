@@ -1,94 +1,91 @@
 
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useCart } from '@/contexts/CartContext';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
-import { Menu, ShoppingBag } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItems } = useCart();
-  const location = useLocation();
   const totalItems = getTotalItems();
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/shop' },
+    { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gold-200/30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 luxury-gradient border-b border-gold-200/30 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-playfair font-bold text-gold-600">
-              Lustre & Light
-            </div>
+          <Link to="/" className="flex-shrink-0">
+            <h1 className="font-playfair text-2xl font-bold gold-gradient bg-clip-text text-transparent">
+              Altyn
+            </h1>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-gold-600 ${
-                  isActive(item.href) 
-                    ? 'text-gold-600 border-b-2 border-gold-600' 
-                    : 'text-foreground'
-                }`}
+                className="text-charcoal-700 hover:text-gold-600 transition-colors duration-200 font-medium"
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* Cart and Mobile Menu */}
+          {/* Cart Icon */}
           <div className="flex items-center space-x-4">
-            {/* Cart Button */}
-            <Link to="/cart">
-              <Button variant="ghost" size="sm" className="relative hover:bg-gold-50">
-                <ShoppingBag className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-gold-600 text-xs text-white flex items-center justify-center">
-                    {totalItems}
-                  </Badge>
-                )}
-              </Button>
+            <Link to="/cart" className="relative p-2">
+              <ShoppingCart className="h-6 w-6 text-charcoal-700 hover:text-gold-600 transition-colors" />
+              {totalItems > 0 && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-gold-500 text-white text-xs flex items-center justify-center p-0">
+                  {totalItems}
+                </Badge>
+              )}
             </Link>
 
-            {/* Mobile Menu */}
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="md:hidden">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col space-y-4 mt-8">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`text-lg font-medium transition-colors hover:text-gold-600 ${
-                        isActive(item.href) ? 'text-gold-600' : 'text-foreground'
-                      }`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gold-200/30 py-4">
+            <nav className="flex flex-col space-y-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-charcoal-700 hover:text-gold-600 transition-colors duration-200 font-medium px-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
