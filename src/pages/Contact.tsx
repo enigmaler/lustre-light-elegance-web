@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -157,20 +156,6 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-gold-200/30">
-              <CardHeader>
-                <CardTitle className="font-playfair text-xl">Visit Our Showroom</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Experience our jewelry collection in person at our beautiful showroom in the heart of New York's jewelry district. Private appointments available.
-                </p>
-                <Button variant="outline" className="border-gold-600 text-gold-600 hover:bg-gold-50">
-                  Schedule Appointment
-                </Button>
               </CardContent>
             </Card>
           </div>
