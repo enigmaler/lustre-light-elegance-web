@@ -42,8 +42,8 @@ const About = () => {
           </CardContent>
         </Card>
 
-        {/* Values Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {/* Services & Values Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <Card className="border-gold-200/30 luxury-shadow">
             <CardContent className="p-6 velvet-texture text-center">
               <h3 className="font-playfair text-xl font-bold text-charcoal-800 mb-4">
@@ -69,14 +69,56 @@ const About = () => {
           <Card className="border-gold-200/30 luxury-shadow">
             <CardContent className="p-6 velvet-texture text-center">
               <h3 className="font-playfair text-xl font-bold text-charcoal-800 mb-4">
-                Timeless Beauty
+                Jewelry Repair
               </h3>
               <p className="text-charcoal-600">
-                Our designs transcend trends, creating pieces that will be treasured for generations.
+                Expert jewelry repair services to restore your precious pieces to their original beauty.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-gold-200/30 luxury-shadow">
+            <CardContent className="p-6 velvet-texture text-center">
+              <h3 className="font-playfair text-xl font-bold text-charcoal-800 mb-4">
+                Watch Services
+              </h3>
+              <p className="text-charcoal-600">
+                Professional watch battery replacement and maintenance to keep your timepieces running perfectly.
               </p>
             </CardContent>
           </Card>
         </div>
+
+        {/* Additional Services Section */}
+        <Card className="border-gold-200/30 luxury-shadow mb-12">
+          <CardContent className="p-8 velvet-texture">
+            <h2 className="font-playfair text-3xl font-bold text-charcoal-800 mb-6">
+              Our Services
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="font-playfair text-xl font-bold text-charcoal-800 mb-4">
+                  Jewelry Repair & Restoration
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Our skilled craftsmen provide comprehensive jewelry repair services, from simple chain repairs 
+                  to complex restoration projects. We handle everything from ring resizing and stone replacement 
+                  to antique jewelry restoration, ensuring your treasured pieces continue to shine for years to come.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-playfair text-xl font-bold text-charcoal-800 mb-4">
+                  Watch Battery & Maintenance
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Keep your timepieces running smoothly with our professional watch services. We offer quick 
+                  battery replacements, watch cleaning, and basic maintenance for most watch brands. Our 
+                  experienced technicians handle your watches with the utmost care and precision.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* CTA Section */}
         <div className="text-center">
