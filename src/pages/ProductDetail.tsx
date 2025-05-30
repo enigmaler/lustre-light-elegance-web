@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -17,6 +16,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   if (!product) {
     return (
@@ -43,13 +43,16 @@ const ProductDetail = () => {
     
     toast({
       title: "Added to Cart",
-      description: (
-        <div className="flex flex-col space-y-2">
-          <span>{quantity} {product.name} has been added to your cart.</span>
-          <Link to="/cart" className="text-gold-600 hover:text-gold-700 font-medium">
-            Go to Cart →
-          </Link>
-        </div>
+      description: `${quantity} ${product.name} has been added to your cart.`,
+      action: (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => navigate('/cart')}
+          className="text-gold-600 border-gold-600 hover:bg-gold-50"
+        >
+          Go to Cart
+        </Button>
       ),
     });
   };
